@@ -28,8 +28,14 @@
 		</md-content>
 
 		<md-sidenav layout="column" md-is-locked-open='true'>
-			<md-button ui-sref="home" sref-opts="{reload:true, notify:true}">Home</md-button>
-			<md-button ui-sref="about">About</md-button>
+			<md-button 
+				ng-repeat="item in setup.navigation"
+				ng-if="!item.abstract"
+				ui-sref="{{item.name}}"
+				sref-opts="{reload:false, notify:false}"
+			>
+				{{item.name}}
+			</md-button>
 		</md-sidenav>
 
 		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -66,6 +72,7 @@
 		<script src="scripts/app.js"></script>
 		<script src="scripts/controllers/main.js"></script>
 		<script src="scripts/controllers/about.js"></script>
+<script src="scripts/controllers/contact.js"></script>
 		<!-- endbuild -->
 	</body>
 </html>

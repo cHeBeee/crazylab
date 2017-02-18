@@ -1,5 +1,3 @@
-'use strict';
-
 /**
 * @ngdoc overview
 * @name crazylabApp
@@ -27,26 +25,27 @@ angular.module('crazylabApp', [
 	$stateProvider
 		.state('home', {
 			url: '/',
+			name: 'home',
 			templateUrl: 'views/main.html',
 			controller: 'MainCtrl',
 		})
 		.state('about', {
 			url: '/about',
+			name: 'about',
 			templateUrl: 'views/about.html',
 			controller: 'AboutCtrl'
+		})		
+		.state('contact', {
+			url: '/contact',
+			name: 'contact',
+			templateUrl: 'views/contact.html',
+			controller: 'contactCtrl'
 		})
+});
 
-	// .when('/', {
-	// 	templateUrl: 'views/main.html',
-	// 	controller: 'MainCtrl',
-	// 	controllerAs: 'main'
-	// })
-	// .when('/about', {
-	// 	templateUrl: 'views/about.html',
-	// 	controller: 'AboutCtrl',
-	// 	controllerAs: 'about'
-	// })
-	// .otherwise({
-	// 	redirectTo: '/'
-	// });
+angular.module('crazylabApp').run(function($state, $rootScope){
+
+	$rootScope.setup = {
+		navigation: $state.get()
+	};
 });
