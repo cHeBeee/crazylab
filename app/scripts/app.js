@@ -13,24 +13,40 @@ angular.module('crazylabApp', [
 	'ngCookies',
 	'ngMessages',
 	'ngResource',
-	'ngRoute',
+	'ui.router',
 	'ngSanitize',
-	'ngTouch'
+	'ngTouch',
+	'ngMaterial'
 ])
-.config(function ($routeProvider, $locationProvider) {
+.config(function ($stateProvider, $locationProvider, $mdThemingProvider) {
+	
+	$mdThemingProvider.theme('default').dark();
+
 	$locationProvider.html5Mode(true);
-	$routeProvider
-	.when('/', {
-		templateUrl: 'views/main.html',
-		controller: 'MainCtrl',
-		controllerAs: 'main'
-	})
-	.when('/about', {
-		templateUrl: 'views/about.html',
-		controller: 'AboutCtrl',
-		controllerAs: 'about'
-	})
-	.otherwise({
-		redirectTo: '/'
-	});
+
+	$stateProvider
+		.state('home', {
+			url: '/',
+			templateUrl: 'views/main.html',
+			controller: 'MainCtrl',
+		})
+		.state('about', {
+			url: '/about',
+			templateUrl: 'views/about.html',
+			controller: 'AboutCtrl'
+		})
+
+	// .when('/', {
+	// 	templateUrl: 'views/main.html',
+	// 	controller: 'MainCtrl',
+	// 	controllerAs: 'main'
+	// })
+	// .when('/about', {
+	// 	templateUrl: 'views/about.html',
+	// 	controller: 'AboutCtrl',
+	// 	controllerAs: 'about'
+	// })
+	// .otherwise({
+	// 	redirectTo: '/'
+	// });
 });
