@@ -85,19 +85,20 @@ module.exports = function (grunt) {
       livereload: {
         options: {
           open: true,
+          base: [
+          	'.tmp',
+          	'<%= yeoman.app %>'
+          ],
           middleware: function (connect) {
-            return [
-              connect.static('.tmp'),
-              connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
-              ),
-              connect().use(
-                '/app/styles',
-                connect.static('./app/styles')
-              ),
-              connect.static(appConfig.app)
-            ];
+          	return [
+          	require('connect-modrewrite') (['!(\\..+)$ / [L]']),
+          	connect.static('.tmp'),
+          	connect().use('/bower_components',connect.static('./bower_components')),
+          	connect().use('/fonts', connect.static('./bower_components/bootstrap/dist/fonts')),
+          	connect().use('/fonts', connect.static('./bower_components/font-awesome/fonts')),
+          	connect().use('/app/styles', connect.static('./app/styles')),
+          	connect.static(appConfig.app)
+          	]
           }
         }
       },
